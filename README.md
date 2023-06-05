@@ -1,68 +1,65 @@
 # TemporalKit
 
-An all in one solution for adding Temporal Stability to a Stable Diffusion Render via an automatic1111 extension
+Sebuah solusi all-in-one untuk menambahkan Stabilitas Temporal ke Render Difusi Stabil melalui ekstensi otomatis1111.
 
-*You must install FFMPEG to path before running this*
+*Anda harus menginstal FFMPEG ke dalam path sebelum menjalankannya.*
 
-You can find a demonstration run through with a single batch here: 
+Anda dapat melihat demonstrasi dengan satu batch di sini:
 
 https://twitter.com/CiaraRowles1/status/1645923461343363072
 
-And a batch demonstration here:
+Dan demonstrasi batch di sini:
 
 https://mobile.twitter.com/CiaraRowles1/status/1646458056803250178
 
-Ebsynth tutorial:
+Tutorial Ebsynth:
 
 https://twitter.com/CiaraRowles1/status/1648462374125576192
 
-NOTE: EBSYNTH DOES NOT REGISTER THE KEYFRAMES IF YOU USE ABOVE 20, 
+CATATAN: EBSYNTH TIDAK MENDAFTARKAN KEYFRAME JIKA ANDA MENGGUNAKAN DI ATAS 20,
 
-Ebsynth split frames tutorial:
+Tutorial pemisahan bingkai Ebsynth:
 
 https://www.youtube.com/watch?v=z3YNHiuvxyg&ab_channel=CiaraRowles
 
-
-
-Example results you can get:
+Contoh hasil yang dapat Anda peroleh:
 
 https://user-images.githubusercontent.com/13116982/234425054-9a1bbf30-93a8-4f5b-9e80-4376ab3c510a.mp4
 
+Nilai-nilai dalam ekstensi ini adalah sebagai berikut:
 
+FPS: Ini adalah fps video yang diekstrak dan diproduksi.
 
+batch_Size: ini adalah jumlah bingkai antara setiap keyframe, jadi misalnya jika Anda memiliki fps 30, dan ukuran batch 10, maka akan membuat 3 keyframe per detik dan memperkirakan sisanya.
 
-The values in the extension are as follows
+per side: ini adalah akar kuadrat dari jumlah bingkai per piring, jadi misalnya nilai per side 2 akan membuat 4 piring, 3 akan membuat 9 piring, 4 akan membuat 16 piring.
 
-FPS: This is the fps the video is extracted and produced at.
+Resolusi: ukuran setiap piring, disarankan untuk mengatur ini menjadi kelipatan variabel per side Anda.
 
-batch_Size: this is the number of frames between each keyframe, so for example if you had an fps of 30, and a batch size of 10, it would make 3 keyframes a second and estimate the rest.
+pengaturan batch: buka drop down ini hanya jika Anda ingin menghasilkan folder piring.
 
-per side: this is the square root of the number of frames per plate, so for example a per side value of 2 would make 4 plates, 3, 9 plates, 4 16 plates.
+Max Frames: saat menghasilkan folder piring, ini mengatur berapa banyak bingkai pada fps di atas yang ingin Anda dapatkan, kemudian membaginya menjadi piring dalam kelompok (per side * per side * batch size)
 
-Resolution: the size of each plate, it is strongly reccomended you set this to a multiple of your per side variable
+Border Frames: setiap piring yang dihasilkan dalam batch akan berisi sejumlah bingkai dari piring berikutnya dan mencampur di antara mereka.
 
-batch settings: only open this drop down if you want to generate a folder of plates.
+Folder Batch: Jika Anda menghasilkan batch piring, tentukan folder kosong dan saat mengklik run, itu akan mengisinya dengan folder dan file terkait, yang perlu Anda lakukan hanyalah pergi ke pemrosesan batch img2img di sd asli, masukkan folder input yang baru dibuat sebagai input, folder output yang baru dibuat sebagai output, hasilkan, kembali ke Tab Batch-Warp temporal-kit, masukkan seluruh direktori folder dan klik baca dan itu akan mengatur semuanya.
 
-Max Frames: when generating a folder of plates, this gets how many frames at the above fps you want to get, and then divides them into plates in groups of (per side * per side * batch size)
-
-Border Frames: every batch generated plate will contain this many frames from the next plate and blend between them.
-
-Batch Folder: If you're generating a batch of plates, just specify a empty folder and on clicking run, it will populate it with the relevant folders and files, all you need to do is go to img2img batch processing in  original sd, enter the newly create input folder as the input, the newly created output folder as the output, generate, move back to the temporal-kit Batch-Warp Tab, put in the whole folder directory and click read and it will set everything up.
-
-Output Resolution (in the batch warp tab): the maximum resolution on any side of the output video.
+Resolusi Output (di tab warp batch): resolusi maksimum di salah satu sisi video output.
 
 FAQ:
 
-Q: my video has smearing
+Q: video saya menghasilkan smearing.
 
-A: use a higher fps and/or lower batchnumber, the closer together the keyframes the less artifacts.
+A: gunakan fps yang lebih tinggi dan/atau nomor batch yang lebih rendah, semakin dekat keyframes, semakin sedikit artefak.
 
 #TODO
-- set up diffusion based upscaling for the plates output 
-- get the img2img button working with batch processing.
-- add a check to see if the output folder was added.
-- fix that weird shutdown error it gives after running
-- hook up to the api.
-- flowmaps from game engine export\import support
+- Mengatur penskalaan berbasis difusi untuk output piring
+- Mengaktifkan tombol img2
 
-Thanks to RAFT for the optical flow system.
+img untuk pemrosesan batch.
+- Menambahkan pengecekan untuk melihat apakah folder output sudah ditambahkan.
+- Memperbaiki kesalahan shutdown aneh setelah dijalankan.
+- Menghubungkan ke API.
+- Mendukung ekspor/impor flowmaps dari mesin permainan.
+
+Terima kasih kepada RAFT untuk sistem aliran optik.
